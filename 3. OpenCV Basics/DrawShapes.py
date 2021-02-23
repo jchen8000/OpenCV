@@ -1,32 +1,40 @@
 import cv2
 import numpy as np
-
-# create an image from numpy array
-img = np.zeros((512,512,3), np.uint8)
-# color the image
-img[:] = 235,235,235
-
-ln_start = (10,10)
-ln_end = (img.shape[1], img.shape[0])
-ln_color = (0, 255, 128)
-cv2.line(img, ln_start, ln_end, ln_color, 3)
-
-rt_topleft = (100,100)
-rt_rightbottom =(250, 350)
-rt_color = (200, 120, 35)
-rt_weight = 5
-#rt_weight = cv2.FILLED
-cv2.rectangle(img, rt_topleft, rt_rightbottom, rt_color, rt_weight)
-
-cl_center = (300,200)
-cl_radius = 50
-cl_color = (123, 95,232)
-cl_weight = 3
-cl_weight = cv2.FILLED
-cv2.circle(img, cl_center, cl_radius, cl_color, cl_weight)
-
-cv2.imshow("Image", img)
+import common.Draw as dw
 
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+if __name__ == '__main__':
+    # create a canvas from numpy array
+    canvas = np.zeros((380, 480, 3), np.uint8)
+    # paint the canvas with a color
+    canvas[:] = 235, 235, 235
+
+    #Draw a line
+    dw.draw_line(canvas, start=(100,100), end=(canvas.shape[1]-100, canvas.shape[0]-100), color=(10,10,10), thickness=10 )
+
+    #Draw rectangles
+    dw.draw_rectangle(canvas, (200,50), (400, 20), color=(255, 255, 0), thickness=2)
+    dw.draw_rectangle(canvas, (20,220), (200, 320), color=(255, 135, 135), thickness=cv2.FILLED)
+
+    #Draw circles
+    dw.draw_circle(canvas, center=(280, 120), radius=50, color=(85, 130, 255), thickness=cv2.FILLED)
+    dw.draw_circle(canvas, center=(380, 160), radius=80, color=(180, 30, 175), thickness=5)
+
+    #Draw ellipses
+    dw.draw_ellipse(canvas, center=(230,280), axes=(60,80), angle=0, start_angle=0, end_angle=360, color=(123,223,210), thickness=cv2.FILLED)
+
+    pts = np.array([[25, 70], [25, 160],
+                    [110, 200], [220, 140],
+                    [200, 70], [110, 20]], np.int32)
+    pts = pts.reshape((-1,1,2))
+    dw.draw_polylines(canvas, [pts], color=(23,23,10))
+
+    cv2.imshow("Canvas", canvas)
+
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
+
+
+
+
