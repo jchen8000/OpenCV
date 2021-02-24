@@ -46,7 +46,6 @@ def print_instruction(img):
     dw.draw_text(img,txtInstruction, (10, 20), 0.5, (255, 255, 255))
     print(txtInstruction)
 
-
 def main():
     global img, img_bk
     windowName = 'Mouse Drawing Polygon'
@@ -55,7 +54,6 @@ def main():
     img_bk = img.copy()
     cv2.namedWindow(windowName)
     cv2.setMouseCallback(windowName, on_mouse)
-    print("Press ESC to exit.")
     while (True):
         cv2.imshow(windowName, img)
         if cv2.waitKey(20) == 27:

@@ -45,6 +45,5 @@ def main():
     cap.release()
     cv2.destroyWindow("Webcam")
 
-
 if __name__ == '__main__':
     main()

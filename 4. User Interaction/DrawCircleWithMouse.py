@@ -53,7 +53,6 @@ def main():
     img_bk = img.copy()
     cv2.namedWindow(windowName)
     cv2.setMouseCallback(windowName, on_mouse)
-
     while (True):
         cv2.imshow(windowName, img)
         if cv2.waitKey(20) == 27:
