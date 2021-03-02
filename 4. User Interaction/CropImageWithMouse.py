@@ -42,7 +42,7 @@ def draw_rectangle(img, point1, point2, is_final=False):
         dw.draw_text(img, str(point2), point2, color=final_color, font_scale=0.5)
 
 def print_instruction(img):
-    txtInstruction = "Press left button to drag a rectangle, release it crop. ESC to exit."
+    txtInstruction = "Press left button to drag a rectangle, release it to crop. ESC to exit."
     dw.draw_text(img,txtInstruction, (10, 20), 0.5, (0, 0, 0))
     print(txtInstruction)
 
