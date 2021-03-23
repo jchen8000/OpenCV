@@ -1,6 +1,5 @@
 import cv2
 import common.ImageProcessing as ip
-import numpy as np
 
 def change_alpha(value):
     global alpha
@@ -21,19 +20,17 @@ if __name__ == "__main__":
     toBlend = cv2.imread("../res/pexels-wendy-wei-3000260.jpg")
     mask = create_mask(toBlend)
 
-
     cv2.createTrackbar("Alpha", title, 50, 100, change_alpha)
-    iproc.show("Original Image 1", iproc.resize(65))
-    iproc.show("Original Image 2", iproc.resize(65,toBlend))
-    iproc.show("Mask", iproc.resize(65, mask))
+    iproc.show("Original Image 1", )
+    iproc.show("Original Image 2", toBlend)
+    iproc.show("Mask", mask)
     toBlendMask = iproc.blend_with_mask(toBlend, mask)
-    iproc.show("Blend Two Images With Mask", iproc.resize(65, toBlendMask))
-
+    iproc.show("Blend Two Images With Mask", toBlendMask)
     print("Press s key to save image, ESC to exit.")
 
     while True:
         blended_image = iproc.blend(toBlend, alpha)
-        iproc.show(image=iproc.resize(65,blended_image))
+        iproc.show(image=blended_image)
         ch = cv2.waitKey(10)
         if (ch & 0xFF) == 27:
             break

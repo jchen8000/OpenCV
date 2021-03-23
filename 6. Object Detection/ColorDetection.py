@@ -47,7 +47,7 @@ cv2.createTrackbar("Sat Max", "TrackBars", 255, 255, empty)
 cv2.createTrackbar("Val Min", "TrackBars", 65, 255, empty)
 cv2.createTrackbar("Val Max", "TrackBars", 255, 255, empty)
 
-img = cv2.imread("../res/flower003.jpg")
+img = cv2.imread("../res/flower005.jpg")
 imgHSV = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 #cv2.imshow("Original", img)
 #cv2.imshow("HSV Vertical Join", imgHSV)

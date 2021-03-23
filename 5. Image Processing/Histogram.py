@@ -1,52 +1,62 @@
 import cv2
 import numpy as np
 from matplotlib import pyplot as plt
+import common.ImageProcessing as ip
 
+def show_histogram():
+    img = np.zeros((400, 400), np.uint8)
+    cv2.rectangle(img, (200,0), (400, 100), (50), -1)
+    cv2.rectangle(img, (200, 100), (400, 200), (100), -1)
+    cv2.rectangle(img, (0,200), (200, 300), (150), -1)
+    cv2.rectangle(img, (0, 300), (200, 400), (200), -1)
+    cv2.rectangle(img, (200,200), (400, 400), (255), -1)
+    cv2.imshow("Image", img)
+    fig = plt.figure(figsize=(6, 4))
+    fig.suptitle('Histogram', fontsize=20)
+    plt.xlabel('Color Value', fontsize=12)
+    plt.ylabel('# of Pixels', fontsize=12)
+    plt.hist(img.ravel(), 256, [0, 256])
+    plt.show()
 
-img = np.zeros((200, 200), np.uint8)
-cv2.rectangle(img, (0,100), (200, 200), (255), -1)
-cv2.rectangle(img, (0,50), (100, 100), (100), -1)
-cv2.imshow("Image", img)
-plt.hist(img.ravel(), 256, [0, 256])
-plt.show()
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+# Get histogram using OpenCV
+def show_histogram_gray(image):
+    hist = cv2.calcHist([image], [0], None, [256], [0, 256])
+    fig = plt.figure(figsize=(6, 4))
+    fig.suptitle('Histogram -- using OpenCV', fontsize=18)
+    plt.plot(hist)
+    plt.show()
 
+# An alternative way to get histogram using matplotlib
+def show_histogram_gray_alt(image):
+    fig = plt.figure(figsize=(6, 4))
+    fig.suptitle('Histogram -- using matplotlib', fontsize=18)
+    plt.hist(image.ravel(), 256, [0, 256])
+    plt.show()
 
-# read a picture in gray mode
-imgGray = cv2.imread("../res/flower003.jpg", 0 )
-cv2.imshow("Image", imgGray)
-plt.hist(imgGray.ravel(), 256, [0, 256])
-print("Showing histogram using plt.hist")
-plt.show()
+def show_histogram_color(image):
+    blue, green, red = cv2.split(image)
+    # cv2.imshow("blue", blue)
+    # cv2.imshow("green", green)
+    # cv2.imshow("red", red)
+    fig = plt.figure(figsize=(6, 4))
+    fig.suptitle('Histogram', fontsize=18)
+    plt.hist(blue.ravel(), 256, [0, 256])
+    plt.hist(green.ravel(), 256, [0, 256])
+    plt.hist(red.ravel(), 256, [0, 256])
+    plt.show()
 
-hist = cv2.calcHist([imgGray], [0], None, [256], [0, 256])
-print("Showing histogram using cv2.calcHist")
-plt.plot(hist)
-plt.show()
+if __name__ == "__main__":
+    # # Introduction to histograms
+    # show_histogram()
 
-cv2.waitKey(0)
-cv2.destroyAllWindows()
+    iproc = ip.ImageProcessing("Histogram", "../res/flower004.jpg")
 
+    # Histograms for gray image
+    grayImage = iproc.to_gray()
+    iproc.show(image=iproc.resize(65, grayImage))
+    show_histogram_gray(grayImage)
+    show_histogram_gray_alt(grayImage)
 
-
-# read a picture in color mode
-# then split it into b, g, r
-# and show histgram for each
-img = cv2.imread("../res/flower003.jpg" )
-b, g, r = cv2.split(img)
-cv2.imshow("Image", img)
-cv2.imshow("b", b)
-cv2.imshow("g", g)
-cv2.imshow("r", r)
-plt.hist(b.ravel(), 256, [0, 256])
-plt.hist(g.ravel(), 256, [0, 256])
-plt.hist(r.ravel(), 256, [0, 256])
-print("Showing histogram of color picture in B, G, R channel")
-plt.show()
-cv2.waitKey(0)
-cv2.destroyAllWindows()
-
-
-
-
+    # Histograms for color image
+    iproc.show(image=iproc.resize(65))
+    show_histogram_color(iproc.image)

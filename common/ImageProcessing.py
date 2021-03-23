@@ -5,7 +5,7 @@ class ImageProcessing(object):
     def __init__(self, window_name, image_name):
         self.window_name = window_name
         self.image_name = image_name
-        cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+        cv2.namedWindow(window_name)
         self.image = cv2.imread(self.image_name)
 
     def show(self, title=None, image=None):
@@ -22,6 +22,12 @@ class ImageProcessing(object):
         height = int(image.shape[0]*percent/100)
         resized_image = cv2.resize(image, (width, height) )
         return resized_image
+
+    def to_gray(self, image=None):
+        if image is None:
+            image = self.image
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        return gray
 
     def crop(self, pt_first, pt_second, image=None):
         if image is None:
@@ -43,6 +49,9 @@ class ImageProcessing(object):
         rot_mat = cv2.getRotationMatrix2D(center, angle, scale)
         rotated_image = cv2.warpAffine(image, rot_mat, (w, h))
         return rotated_image
+
+    def copy(self):
+        return self.image.copy()
 
     def contrast_brightness(self, contrast, brightness, image=None):
         # contrast: between 0.0 and 1.0: less contrast;
@@ -85,4 +94,27 @@ class ImageProcessing(object):
         result = cv2.bitwise_and(blend, mask) + cv2.bitwise_and(image, (255 - mask))
         return result
 
+    def perspective_warp(self, points, width, height, image=None):
+        if image is None:
+            image = self.image
+        pts_source = np.float32([points[0], points[1], points[3], points[2]])
+        pts_target = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
+        matrix = cv2.getPerspectiveTransform(pts_source, pts_target)
+        result = cv2.warpPerspective(image, matrix, (width, height))
+        return result
 
+    def gaussian_blur(self, ksize=(1,1), image=None):
+        if image is None:
+            image = self.image
+        if ksize[0] % 2 == 0:
+            ksize = (ksize[0] + 1, ksize[1])
+        if ksize[1] % 2 == 0:
+            ksize = (ksize[0], ksize[1] + 1)
+        result = cv2.GaussianBlur(image, ksize, cv2.BORDER_DEFAULT)
+        return result
+
+    def median_blur(self, ksize=1, image=None):
+        if image is None:
+            image = self.image
+        result = cv2.medianBlur(image, ksize)
+        return result

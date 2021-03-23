@@ -51,7 +51,10 @@ cv2.destroyAllWindows()
 #
 # Split image into HSV,
 #
-hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+cv2.imshow("Color Image", img)
+cv2.imshow("R,G,B Split", color_split)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
 h,s,v = cv2.split(hsv)
 hsv_split = np.concatenate((h,s,v),axis=1)
 cv2.imshow("Color Image", img)
