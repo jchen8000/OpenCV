@@ -1,20 +1,6 @@
 import cv2
 import numpy as np
-
-def pre_processing(image, show_interim=False):
-    canny_lower_thold = 150
-    canny_upper_thold = 200
-    kernel = np.ones((4, 4), np.uint8)
-    imgGray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    imgCanny = cv2.Canny(imgGray, canny_lower_thold, canny_upper_thold)
-    imgDilation = cv2.dilate(imgCanny, kernel, iterations=1)
-    imgErosion = cv2.erode(imgDilation, kernel, iterations=1)
-    if show_interim:
-        cv2.imshow("1.Gray", imgGray)
-        cv2.imshow("2.Canny", imgCanny)
-        cv2.imshow("3.Dilation", imgDilation)
-        cv2.imshow("4.Erosion", imgErosion)
-    return imgErosion
+from common.Detector import ShapeDetector
 
 def find_contours(image, canvas):
     color = (255, 10, 10)
@@ -25,50 +11,41 @@ def find_contours(image, canvas):
     return contours
 
 def find_shapes(contours, canvas):
+    global shape_detector
+
     contour_color = (255, 10, 10)
     bounding_color = (10, 255, 10)
+    text_color = (10, 10, 10)
     for contour in contours:
-        area = cv2.contourArea(contour)
-        perimeter = cv2.arcLength(contour, True)
-        approximation = cv2.approxPolyDP(contour, 0.02*perimeter, True)
-        x, y, w, h = cv2.boundingRect(approximation)
+        shape, area, perimeter, vertices = shape_detector.detect(contour)
+        x, y, w, h = shape_detector.get_bounding_rect(contour)
+        cx, cy = shape_detector.get_center(contour)
         cv2.drawContours(canvas, contour, -1, contour_color, 3)
         cv2.rectangle(canvas, (x, y), (x + w, y + h), bounding_color, 1)
-        vertices = len(approximation)
-        show_shape_info(canvas, x, y, w, h, type, vertices, area, perimeter)
-
-def show_shape_info(canvas, x, y, w, h, type, vertices, area, perimeter):
-    text_color = (10, 10, 10)
-    if vertices == 3:
-        type = "Tri"
-    elif vertices == 4:
-        aspRatio = float(w) / float(h)
-        if aspRatio > 0.95 and aspRatio < 1.05:
-            type = "Sqr"
-        else:
-            type = "Rect"
-    elif vertices == 8:
-        type = "Cir"
-    else:
-        type = "Oth"
-    textX = x - 25
-    textY = y - 15
-    textPoint = "Vertices={:d}".format(vertices)
-    textArea = "Area={:.0f}".format(area)
-    textPeri = "Perimeter={:.0f}".format(perimeter)
-    print(type, textPoint, textArea, textPeri)
-    cv2.putText(canvas, type, (textX, textY), cv2.FONT_HERSHEY_COMPLEX, 0.65, text_color, 1)
-    cv2.putText(canvas, textArea, (textX, textY + 15), cv2.FONT_HERSHEY_COMPLEX, 0.4, text_color, 1)
-    cv2.putText(canvas, textPeri, (textX, textY + 30), cv2.FONT_HERSHEY_COMPLEX, 0.4, text_color, 1)
+        textX = x - 25
+        textY = y - 15
+        textVert = ": Vertices={:d},".format(vertices)
+        textArea = "Area={:.0f},".format(area)
+        textPeri = "Perimeter={:.0f}".format(perimeter)
+        print(shape, textVert, textArea, textPeri)
+        cv2.putText(canvas, shape, (textX, textY), cv2.FONT_HERSHEY_COMPLEX, 0.5, text_color, 1)
+        cv2.putText(canvas, textArea, (textX, textY + 15), cv2.FONT_HERSHEY_COMPLEX, 0.4, text_color, 1)
+        cv2.putText(canvas, textPeri, (textX, textY + 30), cv2.FONT_HERSHEY_COMPLEX, 0.4, text_color, 1)
+        cv2.circle(canvas, (cx,cy), 2, contour_color, 2)
 
 def shape_detection():
+    global shape_detector
+
+    # Create ShapeDetector object from the class
+    shape_detector = ShapeDetector()
+
     # Load and show the image
     img = cv2.imread("../res/shapes.jpg")
     cv2.imshow("Original", img)
 
     # pre-process the image for shape detection
     # pass True in second parameter will draw the interim results
-    imgPreprocessed = pre_processing(img, False)
+    imgPreprocessed = shape_detector.pre_processing(img, False)
 
     # find contours and draw it on the canvas, which is
     # a copy of the original image
