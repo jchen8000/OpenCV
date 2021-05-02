@@ -10,6 +10,13 @@ WORKING_LINE_COLOR = (127, 127, 127)
 
 # ============================================================================
 
+def resize(image, percent):
+    width = int(image.shape[1] * percent / 100)
+    height = int(image.shape[0] * percent / 100)
+    resized_image = cv2.resize(image, (width, height))
+    return resized_image
+
+
 class PolygonDrawer(object):
     def __init__(self, window_name):
         self.window_name = window_name # Name for our window
