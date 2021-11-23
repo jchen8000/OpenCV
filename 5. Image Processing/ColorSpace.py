@@ -18,6 +18,7 @@ def convert_hsv2bgr(image):
 
 def load_image_gray(file_name):
     gray = cv2.imread("../res/flower003.jpg", cv2.IMREAD_GRAYSCALE)
+    gray = cv2.resize(gray, (int(gray.shape[1] * 60.0 / 100), int(gray.shape[0] * 60.0 / 100)))
     return gray
 
 def split_image(image):

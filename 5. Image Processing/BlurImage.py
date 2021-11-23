@@ -11,15 +11,15 @@ def change_ksize(value):
 def gaussian_blur():
     global ksize
     ksize = (5,5)
-    iproc = ip.ImageProcessing("Original", "../res/flower003.jpg")
-    iproc.show(image=iproc.resize(65))
+    iproc = ip.ImageProcessing("Original", "../res/flower004.jpg")
+    iproc.show(image=iproc.image)
 
     cv2.namedWindow("Gaussian Blur")
     cv2.createTrackbar("K-Size", "Gaussian Blur", 5, 21, change_ksize)
 
     while True:
         blur = iproc.gaussian_blur(ksize)
-        iproc.show("Gaussian Blur", iproc.resize(65,blur))
+        iproc.show("Gaussian Blur", blur)
 
         ch = cv2.waitKey(10)
         if (ch & 0xFF) == 27:   # Press 'ESC' to exit
@@ -34,15 +34,16 @@ def gaussian_blur():
 def median_blur():
     global ksize
     ksize = (5, 5)
-    iproc = ip.ImageProcessing("Original", "../res/pexels-edward-jenner-4250573.jpg")
-    iproc.show(image=iproc.resize(65))
+    iproc = ip.ImageProcessing("Original", "../res/flower008.jpg")
+    iproc.show(image=iproc.image)
+
 
     cv2.namedWindow("Median Blur")
     cv2.createTrackbar("K-Size", "Median Blur", 5, 21, change_ksize)
 
     while True:
         median_blur = iproc.median_blur(ksize[0])
-        iproc.show("Median Blur", iproc.resize(65,median_blur))
+        iproc.show("Median Blur", median_blur)
 
         ch = cv2.waitKey(10)
         if (ch & 0xFF) == 27:   # Press 'ESC' to exit

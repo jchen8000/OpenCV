@@ -118,3 +118,51 @@ class ImageProcessing(object):
             image = self.image
         result = cv2.medianBlur(image, ksize)
         return result
+
+    def remove_background_by_contour(self,
+                                     gs_blur=3,
+                                     canny_lower=10,
+                                     canny_upper=200,
+                                     dilate_iter=1,
+                                     erode_iter=1,
+                                     image = None):
+        if image is None:
+            image = self.image
+        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+        edges = cv2.Canny(gray, canny_lower, canny_upper)
+        edges = cv2.dilate(edges, None)
+        edges = cv2.erode(edges, None)
+        mask = np.zeros_like(edges)
+        contours, _ = cv2.findContours(edges, cv2.RETR_LIST, cv2.CHAIN_APPROX_NONE)
+        for contour in contours:
+            cv2.fillConvexPoly(mask, contour, (255))
+        mask = cv2.dilate(mask, None, iterations=dilate_iter)
+        mask = cv2.erode(mask, None, iterations=erode_iter)
+        if gs_blur % 2 == 0:
+            gs_blur = gs_blur + 1
+        elif gs_blur <= 0:
+            gs_blur = 1
+        mask = cv2.GaussianBlur(mask, (gs_blur, gs_blur), 0)
+        mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
+        bg_removed = cv2.bitwise_and(image, mask)
+        return bg_removed, mask
+
+    def remove_background_by_color(self,
+                                   hsv_lower=(10,10,10),
+                                   hsv_upper=(179,255,255),
+                                   image=None ):
+        if image is None:
+            image = self.image
+        imgHSV = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+        mask = cv2.inRange(imgHSV, hsv_lower, hsv_upper)
+        mask = 255 - mask
+        mask = cv2.cvtColor(mask, cv2.COLOR_GRAY2BGR)
+        bg_removed = cv2.bitwise_and(image, mask)
+        return bg_removed, mask
+
+    def remove_background_by_mask(self, mask, image = None):
+        if image is None:
+            image = self.image
+        bg_removed = cv2.bitwise_and(image, mask)
+        return bg_removed, mask
+

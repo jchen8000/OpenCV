@@ -19,12 +19,19 @@ def color_quantization(image, clusters):
     return result
 
 if __name__ == "__main__":
-    img = cv2.imread("../res/RGB_color_wheel.png")
-    print("Distinct colors in original:", get_distinct_colours(img))
+    img = cv2.imread("../res/color_wheel.png")
+    print("Distinct colors in original image:", get_distinct_colours(img))
     cv2.imshow('Original', img)
     result = color_quantization(img, 9)
     print("Distinct colors after color quantization:", get_distinct_colours(result))
     cv2.imshow('Color Quantization (clusters=9)', result)
+    print("Press any key...")
+    filepath = "C:/temp/color_quan.jpg"
+    cv2.imwrite(filepath, img)
+    filepath = "C:/temp/color_quan2.jpg"
+    cv2.imwrite(filepath, result)
+
+
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
@@ -34,5 +41,6 @@ if __name__ == "__main__":
     result = color_quantization(img, 32)
     print("Distinct colors after color quantization(clusters=32):", get_distinct_colours(result))
     cv2.imshow('Color Quantization (clusters=32)', result)
+    print("Press any key...")
     cv2.waitKey(0)
     cv2.destroyAllWindows()

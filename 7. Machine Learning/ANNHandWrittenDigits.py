@@ -1,5 +1,5 @@
-from keras.datasets import mnist
-from keras import utils
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
 import numpy as np
 import cv2
 from datetime import datetime
@@ -28,6 +28,7 @@ def load_model(filename):
 
 if __name__ == "__main__":
     save_model_name = None
+    # load_model_name = None
     load_model_name = "../res/mnist_ann_784_64_10.xml"
 
     ##############################
@@ -48,7 +49,7 @@ if __name__ == "__main__":
     X_test = X_test.reshape(X_test.shape[0], w * h).astype(np.float32)
     X_train = X_train / 255
     X_test = X_test / 255
-    y_train_onehot = utils.to_categorical(y_train)
+    y_train_onehot = to_categorical(y_train)
     y_train_onehot = np.float32(y_train_onehot)
     y_test = np.uint(y_test)
 
@@ -59,7 +60,7 @@ if __name__ == "__main__":
         print("Training ANN..., depends on the layers of the ANN model, "
               "it could take some time from minutes to hours.")
         print("start time =", datetime.now().time())
-        ann = create_ANN([784, 10])
+        ann = create_ANN([784, 16, 10])
         ann.train(X_train, cv2.ml.ROW_SAMPLE, y_train_onehot)
         print("end time =", datetime.now().time())
     else:

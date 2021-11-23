@@ -21,6 +21,11 @@ def plot_2d_gaussian(mu, sigma):
     ax.set_ylabel('$Y$')
     ax.set_zlabel('$P$')
     plt.show()
+    # #Save the plot
+    # file4save = "c:/temp/gaussian2d.png"
+    # fig.savefig(file4save, dpi=200, format="png", transparent=True)
+    # print(file4save, "file saved.")
+
 
 
 if __name__ == "__main__":

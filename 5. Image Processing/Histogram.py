@@ -10,13 +10,14 @@ def show_histogram():
     cv2.rectangle(img, (0,200), (200, 300), (150), -1)
     cv2.rectangle(img, (0, 300), (200, 400), (200), -1)
     cv2.rectangle(img, (200,200), (400, 400), (255), -1)
-    cv2.imshow("Image", img)
+    cv2.imshow("Histogram", img)
     fig = plt.figure(figsize=(6, 4))
     fig.suptitle('Histogram', fontsize=20)
     plt.xlabel('Color Value', fontsize=12)
     plt.ylabel('# of Pixels', fontsize=12)
     plt.hist(img.ravel(), 256, [0, 256])
     plt.show()
+    cv2.destroyAllWindows()
 
 # Get histogram using OpenCV
 def show_histogram_gray(image):
@@ -46,17 +47,18 @@ def show_histogram_color(image):
     plt.show()
 
 if __name__ == "__main__":
-    # # Introduction to histograms
-    # show_histogram()
+    # Introduction to histograms
+    show_histogram()
 
     iproc = ip.ImageProcessing("Histogram", "../res/flower004.jpg")
 
     # Histograms for gray image
     grayImage = iproc.to_gray()
-    iproc.show(image=iproc.resize(65, grayImage))
+    iproc.show(image=grayImage)
     show_histogram_gray(grayImage)
     show_histogram_gray_alt(grayImage)
 
     # Histograms for color image
-    iproc.show(image=iproc.resize(65))
+    iproc.show(image=iproc.image)
     show_histogram_color(iproc.image)
+    cv2.destroyAllWindows()

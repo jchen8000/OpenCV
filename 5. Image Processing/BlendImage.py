@@ -5,29 +5,17 @@ def change_alpha(value):
     global alpha
     alpha = float(value)/100
 
-def create_mask(image):
-    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-    image = cv2.bitwise_not(image)
-    image[image>128] = 255
-    image[image<127] = 0
-    image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)
-    return image
-
-if __name__ == "__main__":
+def blendTwoImages(imageFile1, imageFile2):
+    global alpha
     alpha = 0.5
     title = "Blend Two Images"
-    iproc = ip.ImageProcessing(title, "../res/pexels-valdemaras-d-2230346.jpg")
-    toBlend = cv2.imread("../res/pexels-wendy-wei-3000260.jpg")
-    mask = create_mask(toBlend)
-
+    iproc = ip.ImageProcessing(title, imageFile1)
+    toBlend = cv2.imread(imageFile2)
     cv2.createTrackbar("Alpha", title, 50, 100, change_alpha)
+
     iproc.show("Original Image 1", )
     iproc.show("Original Image 2", toBlend)
-    iproc.show("Mask", mask)
-    toBlendMask = iproc.blend_with_mask(toBlend, mask)
-    iproc.show("Blend Two Images With Mask", toBlendMask)
     print("Press s key to save image, ESC to exit.")
-
     while True:
         blended_image = iproc.blend(toBlend, alpha)
         iproc.show(image=blended_image)
@@ -40,4 +28,10 @@ if __name__ == "__main__":
             cv2.imwrite(filepath, blended_image)
             print("File saved to " + filepath)
     cv2.destroyAllWindows()
+
+if __name__ == "__main__":
+    image1 = "../res/sky001.jpg"
+    image2 = "../res/bird002.jpg"
+    blendTwoImages(image1, image2)
+
 

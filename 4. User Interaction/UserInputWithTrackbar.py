@@ -17,6 +17,13 @@ def change_hue(value):
     print("Hue: " + str(value))
     cap.set(cv2.CAP_PROP_HUE, value)
 
+def resize(image, percent):
+    width = int(image.shape[1] * percent / 100)
+    height = int(image.shape[0] * percent / 100)
+    resized_image = cv2.resize(image, (width, height))
+    return resized_image
+
+
 def main():
     global cap
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)    # read from webcam
@@ -35,7 +42,7 @@ def main():
 
     success, img = cap.read()
     while success:
-        cv2.imshow("Webcam", img)
+        cv2.imshow("Webcam", resize(img, 90))
 
         # Press ESC key to break the loop
         if cv2.waitKey(10) & 0xFF == 27:

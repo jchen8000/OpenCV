@@ -8,7 +8,7 @@ import cv2
 from datetime import datetime
 
 def show_random_digits(X, Y, row, col):
-    _, axarr = plt.subplots(row, col, figsize=(6, 6))
+    fig, axarr = plt.subplots(row, col, figsize=(6, 6))
     for i in range(row):
         filter = np.where((Y == i))
         X1, Y1 = X[filter], Y[filter]
@@ -19,19 +19,27 @@ def show_random_digits(X, Y, row, col):
             axarr[i, j].text(0.5, 1, str(Y1[index]), fontsize=12, c='g')
     print("The true label is shown in green.")
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/KNNHandDigits.png"
+    # fig.savefig(file4save, dpi=200, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 def show_random_result(X, Y, row, col, pred):
-    _, axarr = plt.subplots(row, col, figsize=(6, 6))
+    fig, axarr = plt.subplots(row, col, figsize=(6, 6))
     for i in range(row):
         for j in range(col):
             index = np.random.randint(X.shape[0])
             axarr[i, j].imshow(X[index], cmap="binary")
             axarr[i, j].axis('off')
             axarr[i, j].text(0.5, 1, str(Y[index]), fontsize=12, c='g')
-            axarr[i, j].text(10,  1, str(pred[index]), fontsize=12, c='r')
+            axarr[i, j].text(10,  1, "("+str(pred[index])+")", fontsize=12, c='r')
     print("The true label is shown in green, "
-          "and the predicted value is shown within [] in red.")
+          "and the predicted value is shown within () in red.")
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/KNNHandDigits2.png"
+    # fig.savefig(file4save, dpi=200, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 if __name__ == "__main__":
     ##############################

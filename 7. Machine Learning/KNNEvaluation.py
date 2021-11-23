@@ -1,7 +1,7 @@
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
-from sklearn.datasets.samples_generator import make_blobs
+from sklearn.datasets import make_blobs
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 from sklearn.metrics import accuracy_score
@@ -21,11 +21,15 @@ def evaluate_knn(k=None):
 
     A = X_train[y_train.ravel() == 0]
     B = X_train[y_train.ravel() == 1]
-    plt.figure(figsize=(6, 4))
-    plt.scatter(A[:, 0], A[:, 1], marker='D', s=5, c='b', label='0')
-    plt.scatter(B[:, 0], B[:, 1], marker='o', s=5, c='y', label='1')
+    fig = plt.figure(figsize=(8, 6))
+    plt.scatter(A[:, 0], A[:, 1], marker='D', s=20, c='blue', label='0')
+    plt.scatter(B[:, 0], B[:, 1], marker='o', s=20, c='chocolate', label='1')
     plt.legend(loc='upper right', fontsize=12)
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/KNN01.png"
+    # fig.savefig(file4save, dpi=200, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
     knn = cv2.ml.KNearest_create()
     knn.train(X_train, cv2.ml.ROW_SAMPLE, y_train)
@@ -48,13 +52,17 @@ def evaluate_knn(k=None):
         print("Classification Report:\n", classification_report(y_test, res_test))
 
 
-    plt.figure(figsize=(6, 4))
+    fig2 = plt.figure(figsize=(8, 6))
     plt.plot(kVals, accuracies_train, label="Training set")
     plt.plot(kVals, accuracies_test, label = "Testing set")
     plt.xlabel("K Value")
     plt.ylabel("Accuracy")
     plt.legend()
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/KNN02.png"
+    # fig2.savefig(file4save, dpi=200, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 if __name__ == "__main__":
     evaluate_knn(k=20)

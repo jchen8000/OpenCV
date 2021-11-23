@@ -6,7 +6,7 @@ import common.ImageProcessing as ip
 drawing = False
 final_color = (0, 0, 255)
 drawing_color = (0, 0, 125)
-width, height = 220, 320
+width, height = 320, 480
 points = []
 
 def on_mouse(event, x, y, flags, param):
@@ -52,7 +52,7 @@ if __name__ == "__main__":
     global img, img_bk, iproc, warped_image
 
     title = "Original Image"
-    iproc = ip.ImageProcessing(title, "../res/pexels-sagar-soneji-1908136.jpg")
+    iproc = ip.ImageProcessing(title, "../res/skewed_image001.jpg")
     img = iproc.image
     print_instruction(img)
     img_bk = iproc.copy()
@@ -66,7 +66,7 @@ if __name__ == "__main__":
             break
         elif ch == ord('s'):
             # press 's' key to save image
-            filepath = "C:/temp/blend_image.png"
+            filepath = "C:/temp/warp_image.png"
             cv2.imwrite(filepath, warped_image)
             print("File saved to " + filepath)
     cv2.destroyAllWindows()

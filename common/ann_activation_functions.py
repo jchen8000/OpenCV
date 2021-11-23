@@ -22,6 +22,10 @@ def identity_function():
     ax[1].text(0.1, 3.5, r"$g'(z)=1", fontsize=16)
     ax[1].text(3.95, -0.5, r'$z$', fontsize=16)
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/identity_func.png"
+    # fig.savefig(file4save, dpi=150, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 
 def sigmoid(z):
@@ -50,6 +54,10 @@ def sigmoid_function():
     ax[1].text(0.1, 1.1, r"$g'(z) = g(z)(1-g(z))$", fontsize=16)
     ax[1].text(4.95, 0.03, r'$z$', fontsize=16)
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/sigmoid_func.png"
+    # fig.savefig(file4save, dpi=150, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 def tanh_function():
     z = np.arange(-5, 5, .1)
@@ -73,7 +81,10 @@ def tanh_function():
     ax[1].text(0.1, 1.2, r"$g'(z)=1-g(z)^2$", fontsize=16)
     ax[1].text(4.95, 0.03, r'$z$', fontsize=16)
     plt.show()
-
+    # Save the plot
+    # file4save = "c:/temp/tanh_func.png"
+    # fig.savefig(file4save, dpi=150, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 def ReLU(x):
     return np.maximum(0.0, x)
@@ -100,9 +111,13 @@ def relu_function():
     ax[1].grid()
     ax[1].set_ylim([-0.2, 5])
     ax[1].text(0.1, 4.5, r"$g'(z)=1, z>0$", fontsize=16)
-    ax[1].text(0.9, 4.2, r"$=0, z<0$", fontsize=16)
+    ax[1].text(1.18, 4.2, r"$=0, z<0$", fontsize=16)
     ax[1].text(3.95, -0.3, r'$z$', fontsize=16)
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/relu_func.png"
+    # fig.savefig(file4save, dpi=150, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 def Leaky_ReLU(z, epsilon=0.01):
     return np.maximum(epsilon * z, z)
@@ -130,12 +145,13 @@ def leaky_relu_function():
     ax[1].grid()
     ax[1].set_ylim([-0.5, 5])
     ax[1].text(0.1, 4.5, r"$g'(z)=1, z>0$", fontsize=16)
-    ax[1].text(0.9, 4.2, r"$=\epsilon, z<0$", fontsize=16)
+    ax[1].text(1.18, 4.2, r"$=\epsilon, z<0$", fontsize=16)
     ax[1].text(3.95, -0.3, r'$z$', fontsize=16)
     plt.show()
-
-
-
+    # Save the plot
+    # file4save = "c:/temp/leaky_func.png"
+    # fig.savefig(file4save, dpi=150, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 def gaussian(z):
     return np.exp(-z*z)
@@ -160,15 +176,19 @@ def gaussian_function():
     ax[1].set_title('Gaussian Derivative',fontsize=18)
     ax[1].set_ylim([-1.0, 1.35])
     ax[1].grid()
-    ax[1].text(0.1, 1.15, r"$g'(z) = -2xe^{-z^{2}}}$", fontsize=14)
+    ax[1].text(0.1, 1.15, r"$g'(z) = -2ze^{-z^{2}}}$", fontsize=14)
     ax[1].text(4.95, 0.03, r'$z$', fontsize=16)
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/gaussian_func.png"
+    # fig.savefig(file4save, dpi=150, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 if __name__ == "__main__":
-    figsize = (10, 4)
-    identity_function()
-    sigmoid_function()
-    gaussian_function()
-    tanh_function()
+    figsize = (12, 5)
+    # identity_function()
+    # sigmoid_function()
+    # tanh_function()
     relu_function()
     leaky_relu_function()
+    # gaussian_function()

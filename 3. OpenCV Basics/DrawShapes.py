@@ -6,11 +6,22 @@ import common.Draw as dw
 if __name__ == '__main__':
     # create a canvas from numpy array
     canvas = np.zeros((380, 480, 3), np.uint8)
+    cv2.imshow("Canvas", canvas)
+    print("Press any key to continue...")
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+
     # paint the canvas with a color
     canvas[:] = 235, 235, 235
+    cv2.imshow("Canvas", canvas)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     #Draw a line
     dw.draw_line(canvas, start=(100,100), end=(canvas.shape[1]-100, canvas.shape[0]-100), color=(10,10,10), thickness=10 )
+    cv2.imshow("Canvas", canvas)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
 
     #Draw rectangles
     dw.draw_rectangle(canvas, (200,50), (400, 20), color=(255, 255, 0), thickness=2)

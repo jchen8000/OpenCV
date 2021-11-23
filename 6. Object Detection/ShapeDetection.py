@@ -28,9 +28,9 @@ def find_shapes(contours, canvas):
         textArea = "Area={:.0f},".format(area)
         textPeri = "Perimeter={:.0f}".format(perimeter)
         print(shape, textVert, textArea, textPeri)
-        cv2.putText(canvas, shape, (textX, textY), cv2.FONT_HERSHEY_COMPLEX, 0.5, text_color, 1)
-        cv2.putText(canvas, textArea, (textX, textY + 15), cv2.FONT_HERSHEY_COMPLEX, 0.4, text_color, 1)
-        cv2.putText(canvas, textPeri, (textX, textY + 30), cv2.FONT_HERSHEY_COMPLEX, 0.4, text_color, 1)
+        cv2.putText(canvas, shape, (textX, textY), cv2.FONT_HERSHEY_COMPLEX, 0.6, text_color, 1)
+        cv2.putText(canvas, textArea, (textX, textY + 15), cv2.FONT_HERSHEY_COMPLEX, 0.5, text_color, 1)
+        cv2.putText(canvas, textPeri, (textX, textY + 30), cv2.FONT_HERSHEY_COMPLEX, 0.5, text_color, 1)
         cv2.circle(canvas, (cx,cy), 2, contour_color, 2)
 
 def shape_detection():
@@ -45,7 +45,7 @@ def shape_detection():
 
     # pre-process the image for shape detection
     # pass True in second parameter will draw the interim results
-    imgPreprocessed = shape_detector.pre_processing(img, False)
+    imgPreprocessed = shape_detector.pre_processing(img, True)
 
     # find contours and draw it on the canvas, which is
     # a copy of the original image

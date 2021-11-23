@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import cv2
 
 def show_random_digits(X, Y, row, col):
-    _, axarr = plt.subplots(row, col, figsize=(6, 6))
+    fig, axarr = plt.subplots(row, col, figsize=(6, 6))
     for i in range(row):
         filter = np.where((Y == i))
         X1, Y1 = X[filter], Y[filter]
@@ -13,6 +13,10 @@ def show_random_digits(X, Y, row, col):
             axarr[i, j].imshow(X1[index], cmap="binary")
             axarr[i, j].axis('off')
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/handDigits.png"
+    # fig.savefig(file4save, dpi=200, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 def show_result(results):
     fig, ax = plt.subplots(1, 10, figsize=(6, 1))
@@ -20,6 +24,10 @@ def show_result(results):
         axi.imshow(result, interpolation='nearest', cmap="binary")
         axi.axis('off')
     plt.show()
+    # Save the plot
+    # file4save = "c:/temp/handDigits2.png"
+    # fig.savefig(file4save, dpi=200, format="png", transparent=True)
+    # print(file4save, "file saved.")
 
 if __name__ == "__main__":
     print("Loading MINST dataset...")

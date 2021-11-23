@@ -24,11 +24,6 @@ def color_detection():
 
     # Load and show the image
     img = cv2.imread("../res/colors.jpg")
-    percent = 70
-    width = int(img.shape[1] * percent / 100)
-    height = int(img.shape[0] * percent / 100)
-    img = cv2.resize(img, (width, height))
-
     result = img.copy()
 
     imgPreprocessed = shape_detector.pre_processing(img, False)
