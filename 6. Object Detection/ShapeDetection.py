@@ -22,8 +22,8 @@ def find_shapes(contours, canvas):
         cx, cy = shape_detector.get_center(contour)
         cv2.drawContours(canvas, contour, -1, contour_color, 3)
         cv2.rectangle(canvas, (x, y), (x + w, y + h), bounding_color, 1)
-        textX = x - 25
-        textY = y - 15
+        textX = x
+        textY = y
         textVert = ": Vertices={:d},".format(vertices)
         textArea = "Area={:.0f},".format(area)
         textPeri = "Perimeter={:.0f}".format(perimeter)
@@ -40,7 +40,7 @@ def shape_detection():
     shape_detector = ShapeDetector()
 
     # Load and show the image
-    img = cv2.imread("../res/shapes.jpg")
+    img = cv2.imread("../res/shapes_002.jpg")
     cv2.imshow("Original", img)
 
     # pre-process the image for shape detection

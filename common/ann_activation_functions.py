@@ -186,9 +186,9 @@ def gaussian_function():
 
 if __name__ == "__main__":
     figsize = (12, 5)
-    # identity_function()
-    # sigmoid_function()
-    # tanh_function()
+    identity_function()
+    sigmoid_function()
+    tanh_function()
     relu_function()
     leaky_relu_function()
-    # gaussian_function()
+    gaussian_function()
