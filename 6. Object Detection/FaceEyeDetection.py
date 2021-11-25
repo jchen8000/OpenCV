@@ -24,6 +24,6 @@ if __name__ == "__main__":
     cv2.imshow("Face and Eye Detection", detect_face_and_eye(img) )
 
     cv2.waitKey(0)
-    cv2.destroyWindow("Face and Eye Detection")
+    cv2.destroyAllWindows()
 
 
