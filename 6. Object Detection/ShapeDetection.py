@@ -28,9 +28,9 @@ def find_shapes(contours, canvas):
         textArea = "Area={:.0f},".format(area)
         textPeri = "Perimeter={:.0f}".format(perimeter)
         print(shape, textVert, textArea, textPeri)
-        cv2.putText(canvas, shape, (textX, textY), cv2.FONT_HERSHEY_COMPLEX, 0.6, text_color, 1)
-        cv2.putText(canvas, textArea, (textX, textY + 15), cv2.FONT_HERSHEY_COMPLEX, 0.5, text_color, 1)
-        cv2.putText(canvas, textPeri, (textX, textY + 30), cv2.FONT_HERSHEY_COMPLEX, 0.5, text_color, 1)
+        cv2.putText(canvas, shape, (textX, textY+10), cv2.FONT_HERSHEY_COMPLEX, 1, text_color, 2)
+        cv2.putText(canvas, textArea, (textX, textY + 40), cv2.FONT_HERSHEY_COMPLEX, 0.8, text_color, 1)
+        cv2.putText(canvas, textPeri, (textX, textY + 65), cv2.FONT_HERSHEY_COMPLEX, 0.8, text_color, 1)
         cv2.circle(canvas, (cx,cy), 2, contour_color, 2)
 
 def shape_detection():
