@@ -1,5 +1,7 @@
 import cv2
 import numpy as np
+print(cv2.__version__)
+
 img = np.zeros((480,1000,3), np.uint8)
 img[:] = 235,235,235
 
