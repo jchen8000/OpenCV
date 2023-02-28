@@ -3,7 +3,7 @@ import common.Draw as dw
 
 drawing = False
 final_color = (255, 255, 255)
-drawing_color = (125, 125, 125)
+drawing_color = (238, 238, 238)
 pt_first = (0, 0)
 pt_second = (0, 0)
 
@@ -36,8 +36,9 @@ def draw_rectangle(img, point1, point2, is_final=False):
     if is_final == False:
         dw.draw_rectangle(img, point1, point2, drawing_color)
         dw.draw_text(img, str(point1), point1, color=drawing_color, font_scale=0.5)
+        dw.draw_text(img, str(point2), point2, color=final_color, font_scale=0.5)
     else:
-        dw.draw_rectangle(img, point1, point2, final_color)
+        dw.draw_rectangle(img, point1, point2, final_color, thickness=2)
         dw.draw_text(img, str(point1), point1, color=final_color, font_scale=0.5)
         dw.draw_text(img, str(point2), point2, color=final_color, font_scale=0.5)
 
