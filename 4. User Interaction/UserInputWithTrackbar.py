@@ -26,8 +26,7 @@ def resize(image, percent):
 
 def main():
     global cap
-    # cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  # read from webcam, cv2.CAP_DSHOW is for windows
-    cap = cv2.VideoCapture(0, cv2.CAP_V4L)      # read from webcam, cv2.CAP_V4K is for linux
+    cap = cv2.VideoCapture(0)
     cap.set(cv2.CAP_PROP_FRAME_WIDTH, 800)      # set width
     cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)     # set height
     cap.set(cv2.CAP_PROP_BRIGHTNESS, 100)       # set initial brightness
