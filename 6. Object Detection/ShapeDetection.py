@@ -14,7 +14,7 @@ def find_shapes(contours, canvas):
     global shape_detector
 
     contour_color = (255, 10, 10)
-    bounding_color = (10, 255, 10)
+    bounding_color = (10, 10, 10)
     text_color = (10, 10, 10)
     for contour in contours:
         shape, area, perimeter, vertices = shape_detector.detect(contour)
@@ -23,7 +23,7 @@ def find_shapes(contours, canvas):
         cv2.drawContours(canvas, contour, -1, contour_color, 3)
         cv2.rectangle(canvas, (x, y), (x + w, y + h), bounding_color, 1)
         textX = x
-        textY = y
+        textY = y - 70
         textVert = ": Vertices={:d},".format(vertices)
         textArea = "Area={:.0f},".format(area)
         textPeri = "Perimeter={:.0f}".format(perimeter)

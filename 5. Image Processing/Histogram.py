@@ -5,11 +5,12 @@ import common.ImageProcessing as ip
 
 def show_histogram():
     img = np.zeros((400, 400), np.uint8)
-    cv2.rectangle(img, (200,0), (400, 100), (50), -1)
-    cv2.rectangle(img, (200, 100), (400, 200), (100), -1)
-    cv2.rectangle(img, (0,200), (200, 300), (150), -1)
+    cv2.rectangle(img, (200, 0), (400, 100), (100), -1)
+    cv2.rectangle(img, (0, 100), (200, 200), (50), -1)
+    cv2.rectangle(img, (200, 100), (400, 200), (150), -1)
+    cv2.rectangle(img, (0, 200), (200, 300), (175), -1)
     cv2.rectangle(img, (0, 300), (200, 400), (200), -1)
-    cv2.rectangle(img, (200,200), (400, 400), (255), -1)
+    cv2.rectangle(img, (200, 200), (400, 400), (255), -1)
     cv2.imshow("Histogram", img)
     fig = plt.figure(figsize=(6, 4))
     fig.suptitle('Histogram', fontsize=20)
