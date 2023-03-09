@@ -15,9 +15,10 @@ def show_hsv_values(image, hsv, canvas):
             cv2.imshow("Mask", mask)
         color, mean = color_detector.get_color_label(hsv, mask)
         x, y, w, h = shape_detector.get_bounding_rect(contour)
+        y = y - 50
         text = "hsv=({:.0f},{:.0f},{:.0f})".format(mean[0],mean[1],mean[2])
-        cv2.putText(canvas, color, (x-20, y+10), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
-        cv2.putText(canvas, text, (x-20, y+35), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0), 2)
+        cv2.putText(canvas, color, (x-20, y), cv2.FONT_HERSHEY_COMPLEX, 1, (0, 0, 0), 2)
+        cv2.putText(canvas, text, (x-20, y+25), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0, 0, 0), 2)
         i += 1
 
 def color_detection():
