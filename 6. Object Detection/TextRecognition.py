@@ -38,15 +38,19 @@ def recognize_by_word(image):
             if len(word) == 12:
                 t,x,y,w,h = word[11], int(word[6]), int(word[7]), int(word[8]), int(word[9])
                 cv2.rectangle(image, (x,y), (w+x,h+y), (0,0,255),1)
-                cv2.putText(image, t, (x,y-5), cv2.FONT_HERSHEY_COMPLEX, 0.9, (0,0,255), 1)
+                cv2.putText(image, t, (x,y-5), cv2.FONT_HERSHEY_COMPLEX, 0.8, (0,0,255), 1)
 
 def text_recognition():
-    img = cv2.imread("../res/text_for_ocr.png")
-    width, height = 880, 760
-    # points = [(69, 1), (1089, 83), (1020, 947), (0, 866)]
-    points = [(64,106), (1058,182), (998,940), (4,863)]
-    warped = perspective_warp(points, width, height, img)
+    # img = cv2.imread("../res/text_for_ocr.png")
+    # width, height = 880, 760
+    # # points = [(69, 1), (1089, 83), (1020, 947), (0, 866)]
+    # points = [(64,106), (1058,182), (998,940), (4,863)]
 
+    img = cv2.imread("../res/text_for_ocr2.jpg")
+    width, height = 1000, 1020
+    points = [(103, 14), (1103, 104), (1008, 1130), (10, 1040)]
+
+    warped = perspective_warp(points, width, height, img)
     cv2.imshow("Warped", warped)
     cv2.imshow("Original", img)
     text = recognize_to_string(warped)
