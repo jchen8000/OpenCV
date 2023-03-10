@@ -14,6 +14,7 @@ def show_hsv_values(image, hsv, canvas):
         if i == 15:
             cv2.imshow("Mask", mask)
         color, mean = color_detector.get_color_label(hsv, mask)
+        print( color, np.round(mean, 0) )
         x, y, w, h = shape_detector.get_bounding_rect(contour)
         y = y - 50
         text = "hsv=({:.0f},{:.0f},{:.0f})".format(mean[0],mean[1],mean[2])
