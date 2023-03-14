@@ -1,22 +1,14 @@
 import cv2
-import pafy
 
-def human_detection_from_youtube(url):
-    video = pafy.new(url)
-    print(video.videostreams)
-    stream = video.videostreams[6]
-    cap = cv2.VideoCapture()
-    cap.open(stream.url)
-    i = 0
+def human_detection_from_video():
+    cap = cv2.VideoCapture(0)
     success, image = cap.read()
     while success:
-        if i > 300:
-            cv2.imshow("Human Detection from Youtube", human_detection(image))
+        cv2.imshow("Human Detection from Video", human_detection(image))
         # Press ESC key to break the loop
         if cv2.waitKey(5) & 0xFF == 27:
             break
         success, image = cap.read()
-        i += 1
     cap.release()
     cv2.destroyAllWindows()
 
@@ -47,6 +39,6 @@ if __name__ == "__main__":
     cv2.destroyAllWindows()
 
     print("Loading youtube video...")
-    human_detection_from_youtube("https://www.youtube.com/watch?v=WriuvU1rXkc")
+    human_detection_from_video()
 
 
