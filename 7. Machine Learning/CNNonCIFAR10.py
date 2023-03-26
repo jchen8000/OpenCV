@@ -121,6 +121,7 @@ if __name__ == "__main__":
 
     # Save the model
     # cnn_model.save('cnn_on_cifar-10.h5')
+    cnn_model.save('cnn_on_cifar-10')
     # Evaluation
     score = cnn_model.evaluate(X_test, to_categorical(y_test), verbose=1)
     print('Test loss:', score[0])
