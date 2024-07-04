@@ -2,7 +2,7 @@
 
 This repository contains the source code and accompanying materials for the book "Learn OpenCV with Python by Examples" by James Chen. This book is a comprehensive guide to learning the basics of computer vision and machine learning using the powerful OpenCV library and the Python programming language. It offers a practical, hands-on approach to learn the concepts and techniques of computer vision through practical example.
 <picture>
-  <img alt="Learn OpenCV with Python by Examples" src="https://github.com/jchen8000/OpenCV/blob/main/images/OpenCV_Python.png" width="188" height="263">
+  <img alt="Learn OpenCV with Python by Examples" src="https://github.com/jchen8000/OpenCV/blob/master/images/OpenCV_Python.png" width="188" height="263">
 </picture>
 
 **Title: Learn OpenCV with Python by Examples**
